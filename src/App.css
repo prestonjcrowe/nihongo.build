@@ -1,5 +1,6 @@
 :root {
   --text-color: #626262;
+  --text-color-light: #b5afa7;
 }
 
 *{
@@ -10,8 +11,6 @@
 
 .app-container {
   display: grid;
-  /* border-style: solid; */
-  /* border-color: red; */
   grid-template-columns: 1fr;
   grid-template-rows: repeat(3, 1fr);
   grid-gap: 10px;
@@ -29,10 +28,14 @@
 .banner-title {
   font-size: 2.5em;
   padding: 1em;
+  color: var(--text-color);
+
 }
 
 .banner-subtitle {
   font-size: 1.5em;
+  color: var(--text-color-light);
+
 }
 
 #active-word {
@@ -69,4 +72,72 @@
 .menu-item {
   color: var(--text-color);
   font-size: 1.5em;
+  cursor: pointer;
+}
+
+.menu-item:hover {
+  color: var(--text-color-light);
+}
+
+/* The animation code */
+@keyframes slide-up {
+  from {top: 100vh}
+  to {top: 0vh}
+}
+
+.kana-menu-container {
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+  overflow: hidden;
+  position: fixed;
+  background-color: white;
+  animation-name: slide-up;
+  animation-duration: 1.5s;
+}
+
+.kana-menu-exit-button {
+  font-size: 2.4em;
+  width: fit-content;
+  margin: auto;
+  padding: 1em;
+  cursor: pointer;
+}
+
+.kana-character-menu-container {
+  padding-top: 10em;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(16, 1fr);
+  margin: auto;
+  gap: 0.5em;
+  width: fit-content;
+}
+
+.kana-menu-character {
+  border-radius: 10px;
+  border: 1px solid #c3c3c3;
+  box-sizing: border-box;
+  width: 46px;
+  height: 47px;
+  border: 1px solid #414649;
+  font-size: 1.4em;
+  align-content: center;
+  justify-content: center;
+  padding-left: 0.5em;
+  padding-top: 0.2em;
+  cursor: pointer;
+
+  .selected {
+    border: 1px solid #e49595;
+  }
+}
+
+.kana-menu-character:hover {
+  background-color: #b2e495;
+}
+
+.selected-kana {
+  border: 2px solid #b2e495;
 }
