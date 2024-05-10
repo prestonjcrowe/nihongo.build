@@ -42,6 +42,28 @@ const KanaMenuOverlay = ({ isOpen, onClose, selected, toggleSelected }) => {
     "パ", "ピ", "プ", "ペ", "ポ",
   ]
 
+// ⠀⠀⠀⢸⣦⡀⠀⠀⠀⠀⢀⡄
+// ⠀⠀⠀⢸⣏⠻⣶⣤⡶⢾⡿⠁
+// ⠀⠀⣀⣼⠷⠀⠀⠁⢀⣿⠃⠀
+// ⠴⣾⣯⣅⣀⠀⠀⠀⠈⢻⣦⡀
+// ⠀⠀⠀⠉⢻⡇⣤⣾⣿⣷⣿⣿
+// ⠀⠀⠀⠀⠸⣿⡿⠏⠀⠀⠀⠀
+// ⠀⠀⠀⠀⠀⠟⠁⠀⠀⠀⠀⠀
+//             ⣤⡶⢶⣦⡀
+// ⠀⠀⠀⣴⡿⠟⠷⠆⣠⠋⠀⠀⠀⢸⣿
+// ⠀⠀⠀⣿⡄⠀⠀⠀⠈⠀⠀⠀⠀⣾⡿
+// ⠀⠀⠀⠹⣿⣦⡀⠀⠀⠀⠀⢀⣾⣿
+// ⠀⠀⠀⠀⠈⠻⣿⣷⣦⣀⣠⣾⡿
+// ⠀⠀⠀⠀⠀⠀⠀⠉⠻⢿⡿⠟
+// ⠀⠀⠀⠀⠀⠀⠀⠀⠀⡟⠀⠀⠀⢠⠏⡆⠀⠀⠀⠀⠀⢀⣀⣤⣤⣤⣀⡀
+// ⠀⠀⠀⠀⠀⡟⢦⡀⠇⠀⠀⣀⠞⠀⠀⠘⡀⢀⡠⠚⣉⠤⠂⠀⠀⠀⠈⠙⢦⡀
+// ⠀⠀⠀⠀⠀⡇⠀⠉⠒⠊⠁⠀⠀⠀⠀⠀⠘⢧⠔⣉⠤⠒⠒⠉⠉⠀⠀⠀⠀⠹⣆
+// ⠀⠀⠀⠀⠀⢰⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻⠀⠀⣤⠶⠶⢶⡄⠀⠀⠀⠀⢹⡆
+// ⠀⣀⠤⠒⠒⢺⠒⠀⠀⠀⠀⠀⠀⠀⠀⠤⠊⠀⢸⠀⡿⠀⡀⠀⣀⡟⠀⠀⠀⠀⢸⡇
+// ⠈⠀⠀⣠⠴⠚⢯⡀⠐⠒⠚⠉⠀⢶⠂⠀⣀⠜⠀⢿⡀⠉⠚⠉⠀⠀⠀⠀⣠⠟
+// ⠀⠠⠊⠀⠀⠀⠀⠙⠂⣴⠒⠒⣲⢔⠉⠉⣹⣞⣉⣈⠿⢦⣀⣀⣀⣠⡴⠟
+
+
   const ALPHABETS = {
     "hiragana": HIRAGANA_CHARACTERS,
     "katakana": KATAKANA_CHARACTERS
@@ -63,8 +85,9 @@ const KanaMenuOverlay = ({ isOpen, onClose, selected, toggleSelected }) => {
     }
 
 
-    let className = selected.has(char) ? "kana-menu-character selected-kana" : "kana-menu-character";
-    console.log(className)
+    const className = selected.has(char) ?
+      "kana-menu-character selected-kana" :
+      "kana-menu-character";
     return (
       <div className={className} onClick={() => toggleSelected(char)}>{char}</div>
     )
@@ -89,7 +112,6 @@ const KanaMenuOverlay = ({ isOpen, onClose, selected, toggleSelected }) => {
 
 
 function App() {
-
   const [activeWordIndex, setActiveWordIndex] = useState(0);
   const [selectedKana, setSelectedKana] = useState(new Set([]))
   const [wordList, setWordList] = useState(new Set([]))
@@ -113,24 +135,29 @@ function App() {
       return;
     }
 
-    let newWordList = new Set([])
+    let newWordList = []
     for (const word of dictionary["words"]) {
       let text = word["kana"][0]['text']
       if (shouldIncludeWord(text)) {
         let definition = word["sense"][0]["gloss"][0]["text"]
         let partOfSpeech = word["sense"][0]["partOfSpeech"][0]
-        newWordList.add({ "text": text, "definition": definition, "partOfSpeech": partOfSpeech })
+        newWordList.push({ "text": text, "definition": definition, "partOfSpeech": partOfSpeech })
       }
     }
 
-    // console.log(`Selected Characters: ${selectedKana}`)
-    // console.log(`Word List Size: ${newWordList.size} total words`)
-    setWordList(newWordList)
+    console.log(`Word List Size: ${newWordList.length} total words`)
+    console.log(`Shuffling word list...`)
+    const shuffledWordList = newWordList
+      .map(value => ({ value, sort: Math.random() }))
+      .sort((a, b) => a.sort - b.sort)
+      .map(({ value }) => value)
+
+    setWordList(new Set(shuffledWordList))
     setActiveWordIndex(0)
   }
 
   useEffect(() => {
-    console.log("Dictionary or selected kana changed, updating wordList...")
+    console.log("Dictionary loaded or selected kana changed, updating wordList...")
     updateWordList(selectedKana)
   }, [dictionary, selectedKana])
 
@@ -151,8 +178,10 @@ function App() {
         return;
       }
 
-      console.log(activeWordIndex, showDetails)
       if (showDetails === true) {
+        if (activeWordIndex === wordList.size - 1) {
+          return;
+        }
         setActiveWordIndex(prev => prev + 1)
       }
 
@@ -175,10 +204,16 @@ function App() {
   let activeDefinition = wordList.size > 0 ? [...wordList][activeWordIndex]["definition"] : "..."
   let activePartOfSpeech = wordList.size > 0 ? entityCodes[[...wordList][activeWordIndex]["partOfSpeech"]] : "..."
 
-  // setting for words in order or random
-  // display word count (X out of Y remaining)
+  // setting for words in random order?
+  // display word count (X out of Y remaining)?
+  // can probs get rid of my stats?
+  // would be cool if we could source common groups of words, i.e foods etc
+  // i like the idea of discovering words by accident though...
+  // maybe display multiple definitions ?
+  // should any chars be selected by default?
 
-  let toggleSelected = (char) => {
+
+  const toggleSelected = (char) => {
     console.log(`Toggling ${char}`)
     let newSelectedKana = new Set([...selectedKana])
 
@@ -192,18 +227,15 @@ function App() {
     setSelectedKana(newSelectedKana);
   }
 
-
-
-
   return (
     <div className="app-container">
       <div className="banner-container">
-        <div className="banner-title">romaji.world</div>
-        <div className="banner-subtitle">(●´ω｀●)</div>
+        {/* <div className="banner-title">romaji world</div>
+        <div className="banner-subtitle">( • ̀ω•́ ) ✧ (●´ω｀●)</div> */}
         {/* <div className="banner-title">nihongo.build</div>
         <div className="banner-subtitle">( • ̀ω•́ )✧</div> */}
-        {/* <div className="banner-title">日本語.build</div>
-        <div className="banner-subtitle">kana word building tool</div> */}
+        <div className="banner-title">日本語.build</div>
+        <div className="banner-subtitle">kana word building tool</div>
       </div>
       <div className="active-word-container">
         {
@@ -218,9 +250,9 @@ function App() {
 
       </div>
       <div className="menu-container">
+      <div className="menu-item" onClick={() => setKanaMenuOpen(true)}>edit kana</div>
         <div className="menu-item">about</div>
-        <div className="menu-item" onClick={() => setKanaMenuOpen(true)}>edit kana</div>
-        <div className="menu-item">my stats</div>
+        {/* <div className="menu-item">my stats</div> */}
       </div>
       <KanaMenuOverlay selected={selectedKana} isOpen={kanaMenuOpen} onClose={() => setKanaMenuOpen(false)} toggleSelected={toggleSelected} />
     </div>

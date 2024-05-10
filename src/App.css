@@ -27,7 +27,7 @@
 
 .banner-title {
   font-size: 2.5em;
-  padding: 1em;
+  padding: 0.4em;
   color: var(--text-color);
 
 }
@@ -41,25 +41,25 @@
 
 #active-word {
     color: var(--text-color);
-    font-size: 7em;
+    font-size: 4em;
 }
 
 #active-word-romaji {
     color: var(--text-color);
-    font-size: 3.5em;
+    font-size: 1.2em;
 }
 
 #active-word-definition {
     color: var(--text-color);
-    font-size: 3em;
+    font-size: 1em;
 }
 
 .active-word-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 50px;
-    row-gap: 50px;
+    padding: 25px;
+    row-gap: 25px;
 }
 
 .menu-container {
@@ -103,7 +103,7 @@
   display: flex;
   flex-direction: row;
   padding-top: 1em;
-  width: 18vw;
+  width: 325px;
   margin: auto;
   max-width: 522px;
 }
@@ -117,7 +117,7 @@
 }
 
 .kana-menu-alphabet-button {
-  font-size: 1.6em;
+  font-size: 1em;
   width: fit-content;
   margin: auto;
   cursor: pointer;
@@ -130,7 +130,7 @@
 }
 
 .kana-character-menu-container {
-  padding-top: 2em;
+  padding-top: 1em;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: repeat(16, 1fr);
@@ -144,12 +144,12 @@
   border-radius: 10px;
   border: 1px solid #c3c3c3;
   box-sizing: border-box;
-  width: 4vw;
-  height: 4vw;
-  max-height: 70px;
+  width: 38px;
+  height: 38px;
+  /* max-height: 70px;
   max-width: 70px;
   min-height: 50px;
-  min-width: 50px;
+  min-width: 50px; */
   border: 1px solid #414649;
   font-size: 1.4em;
   align-content: center;
