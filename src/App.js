@@ -2,6 +2,27 @@ import React, { useState, useEffect } from 'react';
 import { toRomaji } from 'wanakana';
 import './App.css';
 
+// ⠀⠀⠀⢸⣦⡀⠀⠀⠀⠀⢀⡄
+// ⠀⠀⠀⢸⣏⠻⣶⣤⡶⢾⡿⠁
+// ⠀⠀⣀⣼⠷⠀⠀⠁⢀⣿⠃⠀
+// ⠴⣾⣯⣅⣀⠀⠀⠀⠈⢻⣦⡀
+// ⠀⠀⠀⠉⢻⡇⣤⣾⣿⣷⣿⣿
+// ⠀⠀⠀⠀⠸⣿⡿⠏⠀⠀⠀⠀
+// ⠀⠀⠀⠀⠀⠟⠁⠀⠀⠀⠀⠀
+//             ⣤⡶⢶⣦⡀
+// ⠀⠀⠀⣴⡿⠟⠷⠆⣠⠋⠀⠀⠀⢸⣿
+// ⠀⠀⠀⣿⡄⠀⠀⠀⠈⠀⠀⠀⠀⣾⡿
+// ⠀⠀⠀⠹⣿⣦⡀⠀⠀⠀⠀⢀⣾⣿
+// ⠀⠀⠀⠀⠈⠻⣿⣷⣦⣀⣠⣾⡿
+// ⠀⠀⠀⠀⠀⠀⠀⠉⠻⢿⡿⠟
+// ⠀⠀⠀⠀⠀⠀⠀⠀⠀⡟⠀⠀⠀⢠⠏⡆⠀⠀⠀⠀⠀⢀⣀⣤⣤⣤⣀⡀
+// ⠀⠀⠀⠀⠀⡟⢦⡀⠇⠀⠀⣀⠞⠀⠀⠘⡀⢀⡠⠚⣉⠤⠂⠀⠀⠀⠈⠙⢦⡀
+// ⠀⠀⠀⠀⠀⡇⠀⠉⠒⠊⠁⠀⠀⠀⠀⠀⠘⢧⠔⣉⠤⠒⠒⠉⠉⠀⠀⠀⠀⠹⣆
+// ⠀⠀⠀⠀⠀⢰⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻⠀⠀⣤⠶⠶⢶⡄⠀⠀⠀⠀⢹⡆
+// ⠀⣀⠤⠒⠒⢺⠒⠀⠀⠀⠀⠀⠀⠀⠀⠤⠊⠀⢸⠀⡿⠀⡀⠀⣀⡟⠀⠀⠀⠀⢸⡇
+// ⠈⠀⠀⣠⠴⠚⢯⡀⠐⠒⠚⠉⠀⢶⠂⠀⣀⠜⠀⢿⡀⠉⠚⠉⠀⠀⠀⠀⣠⠟
+// ⠀⠠⠊⠀⠀⠀⠀⠙⠂⣴⠒⠒⣲⢔⠉⠉⣹⣞⣉⣈⠿⢦⣀⣀⣀⣠⡴⠟
+
 const KanaMenuOverlay = ({ isOpen, onClose, selected, toggleSelected }) => {
   const [alphabet, setAlphabet] = useState("hiragana");
   const HIRAGANA_CHARACTERS = [
@@ -41,28 +62,6 @@ const KanaMenuOverlay = ({ isOpen, onClose, selected, toggleSelected }) => {
     "バ", "ビ", "ブ", "ベ", "ボ",
     "パ", "ピ", "プ", "ペ", "ポ",
   ]
-
-// ⠀⠀⠀⢸⣦⡀⠀⠀⠀⠀⢀⡄
-// ⠀⠀⠀⢸⣏⠻⣶⣤⡶⢾⡿⠁
-// ⠀⠀⣀⣼⠷⠀⠀⠁⢀⣿⠃⠀
-// ⠴⣾⣯⣅⣀⠀⠀⠀⠈⢻⣦⡀
-// ⠀⠀⠀⠉⢻⡇⣤⣾⣿⣷⣿⣿
-// ⠀⠀⠀⠀⠸⣿⡿⠏⠀⠀⠀⠀
-// ⠀⠀⠀⠀⠀⠟⠁⠀⠀⠀⠀⠀
-//             ⣤⡶⢶⣦⡀
-// ⠀⠀⠀⣴⡿⠟⠷⠆⣠⠋⠀⠀⠀⢸⣿
-// ⠀⠀⠀⣿⡄⠀⠀⠀⠈⠀⠀⠀⠀⣾⡿
-// ⠀⠀⠀⠹⣿⣦⡀⠀⠀⠀⠀⢀⣾⣿
-// ⠀⠀⠀⠀⠈⠻⣿⣷⣦⣀⣠⣾⡿
-// ⠀⠀⠀⠀⠀⠀⠀⠉⠻⢿⡿⠟
-// ⠀⠀⠀⠀⠀⠀⠀⠀⠀⡟⠀⠀⠀⢠⠏⡆⠀⠀⠀⠀⠀⢀⣀⣤⣤⣤⣀⡀
-// ⠀⠀⠀⠀⠀⡟⢦⡀⠇⠀⠀⣀⠞⠀⠀⠘⡀⢀⡠⠚⣉⠤⠂⠀⠀⠀⠈⠙⢦⡀
-// ⠀⠀⠀⠀⠀⡇⠀⠉⠒⠊⠁⠀⠀⠀⠀⠀⠘⢧⠔⣉⠤⠒⠒⠉⠉⠀⠀⠀⠀⠹⣆
-// ⠀⠀⠀⠀⠀⢰⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻⠀⠀⣤⠶⠶⢶⡄⠀⠀⠀⠀⢹⡆
-// ⠀⣀⠤⠒⠒⢺⠒⠀⠀⠀⠀⠀⠀⠀⠀⠤⠊⠀⢸⠀⡿⠀⡀⠀⣀⡟⠀⠀⠀⠀⢸⡇
-// ⠈⠀⠀⣠⠴⠚⢯⡀⠐⠒⠚⠉⠀⢶⠂⠀⣀⠜⠀⢿⡀⠉⠚⠉⠀⠀⠀⠀⣠⠟
-// ⠀⠠⠊⠀⠀⠀⠀⠙⠂⣴⠒⠒⣲⢔⠉⠉⣹⣞⣉⣈⠿⢦⣀⣀⣀⣠⡴⠟
-
 
   const ALPHABETS = {
     "hiragana": HIRAGANA_CHARACTERS,
@@ -120,6 +119,50 @@ function App() {
   const [entityCodes, setEntityCodes] = useState({})
   const [kanaMenuOpen, setKanaMenuOpen] = useState(false)
 
+  // Load dictionary on component mount
+  useEffect(() => {
+    console.log("Fetching dictionary JSON...")
+    fetch('entity_codes.json')
+      .then((r) => r.json())
+      .then((data) => setEntityCodes(data))
+      .then(() => fetch('jmdict-eng-common.json'))
+      .then((r) => r.json())
+      .then((data) => setDictionary(data))
+  }, [])
+
+  // Update word list when dictionary or kana updates
+  useEffect(() => {
+    console.log("Dictionary loaded or selected kana changed, updating wordList...")
+    updateWordList(selectedKana)
+  }, [dictionary, selectedKana])
+
+  // Handle key press events
+  useEffect(() => {
+    const handleKeyUp = (e) => {
+      if (e.keyCode !== 32 || wordList.size === 0) {
+        return;
+      }
+
+      if (showDetails) {
+        if (activeWordIndex === wordList.size - 1) {
+          return;
+        }
+        setActiveWordIndex(prev => prev + 1)
+      }
+
+      setShowDetails(prev => !prev)
+    }
+
+    window.document.addEventListener('keyup', handleKeyUp);
+    return () => {
+      window.document.removeEventListener('keyup', handleKeyUp);
+    }
+  }, [activeWordIndex, showDetails, wordList]);
+
+  const getRomajiString = (kana) => {
+    return `(${[...kana].map((c) => toRomaji(c)).join('·')})`
+  }
+
   const shouldIncludeWord = (word) => {
     for (let i = 0; i < word.length; i++) {
       if (!selectedKana.has(word.charAt(i))) {
@@ -156,63 +199,6 @@ function App() {
     setActiveWordIndex(0)
   }
 
-  useEffect(() => {
-    console.log("Dictionary loaded or selected kana changed, updating wordList...")
-    updateWordList(selectedKana)
-  }, [dictionary, selectedKana])
-
-
-  useEffect(() => {
-    console.log("Fetching dictionary JSON...")
-    fetch('entity_codes.json')
-      .then((r) => r.json())
-      .then((data) => setEntityCodes(data))
-      .then(() => fetch('jmdict-eng-common.json'))
-      .then((r) => r.json())
-      .then((data) => setDictionary(data))
-  }, [])
-
-  useEffect(() => {
-    const handleKeyUp = (e) => {
-      if (e.keyCode !== 32 || wordList.size === 0) {
-        return;
-      }
-
-      if (showDetails === true) {
-        if (activeWordIndex === wordList.size - 1) {
-          return;
-        }
-        setActiveWordIndex(prev => prev + 1)
-      }
-
-      setShowDetails(prev => !prev)
-    }
-
-    window.document.addEventListener('keyup', handleKeyUp);
-
-    return () => {
-      window.document.removeEventListener('keyup', handleKeyUp);
-    }
-  }, [activeWordIndex, showDetails, wordList]);
-
-  const getRomajiString = (kana) => {
-    return `(${[...kana].map((c) => toRomaji(c)).join('·')})`
-  }
-
-  let activeWord = wordList.size > 0 ? [...wordList][activeWordIndex]["text"] : "..."
-  let activeRomaji = wordList.size > 0 ? getRomajiString(activeWord) : "..."
-  let activeDefinition = wordList.size > 0 ? [...wordList][activeWordIndex]["definition"] : "..."
-  let activePartOfSpeech = wordList.size > 0 ? entityCodes[[...wordList][activeWordIndex]["partOfSpeech"]] : "..."
-
-  // setting for words in random order?
-  // display word count (X out of Y remaining)?
-  // can probs get rid of my stats?
-  // would be cool if we could source common groups of words, i.e foods etc
-  // i like the idea of discovering words by accident though...
-  // maybe display multiple definitions ?
-  // should any chars be selected by default?
-
-
   const toggleSelected = (char) => {
     console.log(`Toggling ${char}`)
     let newSelectedKana = new Set([...selectedKana])
@@ -227,15 +213,18 @@ function App() {
     setSelectedKana(newSelectedKana);
   }
 
+  const activeWord = wordList.size > 0 ? [...wordList][activeWordIndex]["text"] : "..."
+  const activeRomaji = wordList.size > 0 ? getRomajiString(activeWord) : "..."
+  const activeDefinition = wordList.size > 0 ? [...wordList][activeWordIndex]["definition"] : "..."
+  const activePartOfSpeech = wordList.size > 0 ? entityCodes[[...wordList][activeWordIndex]["partOfSpeech"]] : "..."
+
   return (
     <div className="app-container">
       <div className="banner-container">
-        {/* <div className="banner-title">romaji world</div>
-        <div className="banner-subtitle">( • ̀ω•́ ) ✧ (●´ω｀●)</div> */}
-        {/* <div className="banner-title">nihongo.build</div>
-        <div className="banner-subtitle">( • ̀ω•́ )✧</div> */}
         <div className="banner-title">日本語.build</div>
         <div className="banner-subtitle">kana word building tool</div>
+        {/* <div className="banner-title">romaji world</div>
+        <div className="banner-subtitle">( • ̀ω•́ ) ✧ (●´ω｀●)</div> */}
       </div>
       <div className="active-word-container">
         {
