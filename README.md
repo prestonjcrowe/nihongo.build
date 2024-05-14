@@ -1,6 +1,6 @@
 # nihongo.build
 
-Practice your Japanese with nihongo.build!
+Practice your Japanese with nihongo.build!s
 
 ```
 ⠀⠀⠀⢸⣦⡀⠀⠀⠀⠀⢀⡄
@@ -25,14 +25,20 @@ Practice your Japanese with nihongo.build!
 ⠀⠠⠊⠀⠀⠀⠀⠙⠂⣴⠒⠒⣲⢔⠉⠉⣹⣞⣉⣈⠿⢦⣀⣀⣀⣠⡴⠟
 ```
 
-### TODO
-- setting for words in random order?
-- display word count (X out of Y remaining)?
-- would be cool if we could source common groups of words, i.e foods etc
-- i like the idea of discovering words by accident though...
-- maybe allow selection of word lists OR by kana?s
+### TODOs
+- click and drag for character selection
+- local storage for selected kana etc.
+
+## Low Priority Ideas
 - maybe display multiple definitions?
 - should any chars be selected by default?
-- do we need a separate menu item for stats? what stats to display?
-- consider displaying romaji directly under each kanas
+- maybe display multiple definitions?
+
+## Action Items
+- [Lije] display word counts next to edit kana
+
+## Next Steps
+- implement text input for romaji
+- consider implementing my stats
+- word groups as an alternative to edit kana
 
