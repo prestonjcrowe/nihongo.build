@@ -33,6 +33,8 @@ Practice your Japanese with nihongo.build!s
 - maybe display multiple definitions?
 - should any chars be selected by default?
 - maybe display multiple definitions?
+- show romaji under kana
+- maybe show part of speech (may require multiple defs)
 
 ## Action Items
 - [Lije] display word counts next to edit kana
