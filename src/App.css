@@ -15,8 +15,8 @@
   grid-template-columns: 1fr;
   grid-template-rows: repeat(3, 1fr);
   grid-gap: 10px;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
 }
 
 /* banner */
@@ -139,39 +139,67 @@
 .kana-character-menu-container {
   padding-top: 4vh;
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  grid-template-rows: repeat(16, 1fr);
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(17, 1fr);
   margin: auto;
   gap: 0.5vh;
   width: fit-content;
 }
 
+.kana-menu-romaji-label {
+  font-size: 1.4vh;
+  align-content: center;
+  justify-content: center;
+  padding-left: 1vh;
+  cursor: pointer;
+  color: #c3c3c3;
+}
+
+.selected-romaji-label {
+  color: #414649;
+  font-weight: bold;
+}
+
+
+.kana-menu-romaji-label:hover {
+  color: #5b5f62;
+  font-weight: bold;
+}
+
 .kana-menu-character {
-  border-radius: 10px;
+  /* border-radius: 10px;
   border: 1px solid #c3c3c3;
   box-sizing: border-box;
   width: 4vh;
   height: 4vh;
-  /* max-height: 70px;
-  max-width: 70px;
-  min-height: 46px;
-  min-width: 46px; */
   border: 1px solid #414649;
   font-size: 1.4vh;
   align-content: center;
   justify-content: center;
   padding-left: 1vh;
   cursor: pointer;
+  background-color: #333333; */
+
+  width: 4vh;
+  height: 4vh;
+  font-size: 1.4vh;
+  align-content: center;
+  justify-content: center;
+  padding-left: 1vh;
+  cursor: pointer;
+  color: #c3c3c3; 
 }
 
 .kana-menu-character:hover {
-  border: 1px solid #414649;
-  background-color: #c3c3c3;
+  /* border: 1px solid #414649;
+  background-color: #c3c3c3; */
+  color: #414649;
   
 }
 
 .selected-kana {
-  border: 1px solid #414649;
-  background-color: #414649;
-  color: white;
+  /* border: 1px solid #414649; */
+  background-color: #29343b;
+  color: #c3c3c3 !important;
+  border-radius: 50px;
 }

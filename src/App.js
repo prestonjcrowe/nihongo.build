@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { toRomaji } from 'wanakana';
+import { isHiragana, isKana, isRomaji, toRomaji } from 'wanakana';
 import './App.css';
 
 // ⠀⠀⠀⢸⣦⡀⠀⠀⠀⠀⢀⡄
@@ -23,44 +23,50 @@ import './App.css';
 // ⠈⠀⠀⣠⠴⠚⢯⡀⠐⠒⠚⠉⠀⢶⠂⠀⣀⠜⠀⢿⡀⠉⠚⠉⠀⠀⠀⠀⣠⠟
 // ⠀⠠⠊⠀⠀⠀⠀⠙⠂⣴⠒⠒⣲⢔⠉⠉⣹⣞⣉⣈⠿⢦⣀⣀⣀⣠⡴⠟
 
-const KanaMenuOverlay = ({ isOpen, onClose, selected, toggleSelected }) => {
+const KanaMenuOverlay = ({ isOpen, onClose, selected, setSelectedKana }) => {
   const [alphabet, setAlphabet] = useState("hiragana");
+  const [activeRomajiLabels, setActiveRomajiLabels] = useState({
+    "hiragana": [],
+    "katakana": []
+  });
   const HIRAGANA_CHARACTERS = [
-    "あ", "い", "う", "え", "お",
-    "か", "き", "く", "け", "こ",
-    "さ", "し", "す", "せ", "そ",
-    "た", "ち", "つ", "て", "と",
-    "な", "に", "ぬ", "ね", "の",
-    "は", "ひ", "ふ", "へ", "ほ",
-    "ま", "み", "む", "め", "も",
-    "や", " ", "ゆ", " ", "よ",
-    "ら", "り", "る", "れ", "ろ",
-    "わ", " ", " ", " ", "を",
-    " ", " ", "ん", " ", " ",
-    "が", "ぎ", "ぐ", "げ", "ご",
-    "ざ", "じ", "ず", "ぜ", "ぞ",
-    "だ", "ぢ", "づ", "で", "ど",
-    "ば", "び", "ぶ", "べ", "ぼ",
-    "ぱ", "ぴ", "ぷ", "ぺ", "ぽ",
+    " ", "a", "i", "u", "e", "o",
+    " ", "あ", "い", "う", "え", "お",
+    "k", "か", "き", "く", "け", "こ",
+    "s", "さ", "し", "す", "せ", "そ",
+    "t", "た", "ち", "つ", "て", "と",
+    "n", "な", "に", "ぬ", "ね", "の",
+    "h", "は", "ひ", "ふ", "へ", "ほ",
+    "m", "ま", "み", "む", "め", "も",
+    "y", "や", " ", "ゆ", " ", "よ",
+    "r", "ら", "り", "る", "れ", "ろ",
+    " ", "わ", " ", " ", " ", "を",
+    " ", " ", " ", "ん", " ", " ",
+    "g", "が", "ぎ", "ぐ", "げ", "ご",
+    "s", "ざ", "じ", "ず", "ぜ", "ぞ",
+    "t", "だ", "ぢ", "づ", "で", "ど",
+    "b", "ば", "び", "ぶ", "べ", "ぼ",
+    "p", "ぱ", "ぴ", "ぷ", "ぺ", "ぽ",
   ]
 
   const KATAKANA_CHARACTERS = [
-    "ア", "イ", "ウ", "エ", "オ",
-    "カ", "キ", "ク", "ケ", "コ",
-    "サ", "シ", "ス", "セ", "ソ",
-    "タ", "チ", "ツ", "テ", "ト",
-    "ナ", "ニ", "ヌ", "ネ", "ノ",
-    "ハ", "ヒ", "フ", "ヘ", "ホ",
-    "マ", "ミ", "ム", "メ", "モ",
-    "ヤ", " ", "ユ", " ", "ヨ",
-    "ラ", "リ", "ル", "レ", "ロ",
-    "ワ", " ", " ", " ", "ヲ",
-    " ", " ", "ン", " ", " ",
-    "ガ", "ギ", "グ", "ゲ", "ゴ",
-    "ザ", "ジ", "ズ", "ゼ", "ゾ",
-    "ダ", "ヂ", "ヅ", "デ", "ド",
-    "バ", "ビ", "ブ", "ベ", "ボ",
-    "パ", "ピ", "プ", "ペ", "ポ",
+    " ", "a", "i", "u", "e", "o",
+    " ", "ア", "イ", "ウ", "エ", "オ",
+    "k", "カ", "キ", "ク", "ケ", "コ",
+    "s", "サ", "シ", "ス", "セ", "ソ",
+    "t", "タ", "チ", "ツ", "テ", "ト",
+    "n", "ナ", "ニ", "ヌ", "ネ", "ノ",
+    "h", "ハ", "ヒ", "フ", "ヘ", "ホ",
+    "m", "マ", "ミ", "ム", "メ", "モ",
+    "y", "ヤ", " ", "ユ", " ", "ヨ",
+    "r", "ラ", "リ", "ル", "レ", "ロ",
+    " ", "ワ", " ", " ", " ", "ヲ",
+    " ", " ", " ", "ン", " ", " ",
+    "g", "ガ", "ギ", "グ", "ゲ", "ゴ",
+    "s", "ザ", "ジ", "ズ", "ゼ", "ゾ",
+    "t", "ダ", "ヂ", "ヅ", "デ", "ド",
+    "b", "バ", "ビ", "ブ", "ベ", "ボ",
+    "p", "パ", "ピ", "プ", "ペ", "ポ",
   ]
 
   const ALPHABETS = {
@@ -83,6 +89,87 @@ const KanaMenuOverlay = ({ isOpen, onClose, selected, toggleSelected }) => {
       return (<div></div>)
     }
 
+    const toggleSelected = (char) => {
+      console.log(`Toggling ${char}`);
+      let newSelectedKana = new Set([...selected]);
+      if (selected.has(char)) {
+        newSelectedKana.delete(char);
+        let index = ALPHABETS[alphabet].indexOf(char);
+        let col_selector = ALPHABETS[alphabet][index % 6];
+        let row_selector = ALPHABETS[alphabet][Math.ceil(index / 6) * 6 - 6];
+        console.log(`row label: ${row_selector} col label: ${col_selector}`)
+
+        let activeAlphabetLabels = activeRomajiLabels[alphabet];
+        // If either row or column label is active, must disable both
+        if (activeAlphabetLabels.includes(col_selector) || activeAlphabetLabels.includes(row_selector)) {
+          let labels = activeAlphabetLabels.filter(l => l !== col_selector && l !== row_selector);
+          let newActiveRomajiLabels = { ...activeRomajiLabels };
+          newActiveRomajiLabels[alphabet] = labels;
+          setActiveRomajiLabels(newActiveRomajiLabels)
+        }
+      } else {
+        newSelectedKana.add(char);
+      }
+
+      console.log(newSelectedKana)
+      setSelectedKana(newSelectedKana);
+    }
+
+    const toggleRomajiLabel = (romaijLabel) => {
+      // This method only to be called to select all in a row / column OR
+      // unselect all in a row / column only if they are all selected.
+      // Another method will unset romaji label if an encompassed character
+      // is deselected.
+      console.log(activeRomajiLabels)
+      const vowels = ["a", "i", "u", "e", "o"];
+      const deselect = activeRomajiLabels[alphabet].includes(romaijLabel);
+      const isVowel = vowels.includes(romaijLabel);
+
+      let index = ALPHABETS[alphabet].indexOf(romaijLabel);
+      let newSelectedKana = new Set([...selected]);
+
+      for (let i = 0; i < ALPHABETS[alphabet].length; i++) {
+        let c = ALPHABETS[alphabet][i];
+        if (i > index && (isVowel && i % 6 === index) || (!isVowel && Math.ceil(i / 6) * 6 - 6 === index)) {
+          if (deselect) {
+            console.log(`removing ${c}`)
+            newSelectedKana.delete(c);
+
+          } else if (isKana(c)) {
+            console.log(`adding ${c}`)
+            newSelectedKana.add(c);
+          }
+        }
+      }
+      console.log(selected)
+      console.log(newSelectedKana)
+      console.log(`new kana: ${newSelectedKana.size}`)
+      setSelectedKana(newSelectedKana);
+
+      if (activeRomajiLabels[alphabet].includes(romaijLabel)) {
+        let labels = activeRomajiLabels[alphabet].filter(l => l !== romaijLabel);
+        let newActiveRomajiLabels = { ...activeRomajiLabels };
+        newActiveRomajiLabels[alphabet] = labels;
+
+        setActiveRomajiLabels(newActiveRomajiLabels);
+      } else {
+        let labels = [...activeRomajiLabels[alphabet], romaijLabel];
+        let newActiveRomajiLabels = { ...activeRomajiLabels }
+        newActiveRomajiLabels[alphabet] = labels;
+        setActiveRomajiLabels(newActiveRomajiLabels);
+      }
+
+    }
+
+    // This is a romaji label
+    if (!isKana(char)) {
+      const className = activeRomajiLabels[alphabet].includes(char) ?
+        "kana-menu-romaji-label selected-romaji-label" :
+        "kana-menu-romaji-label";
+
+      return <div className={className} onClick={() => toggleRomajiLabel(char)}>{char}</div>;
+    }
+
 
     const className = selected.has(char) ?
       "kana-menu-character selected-kana" :
@@ -103,7 +190,14 @@ const KanaMenuOverlay = ({ isOpen, onClose, selected, toggleSelected }) => {
         <div className="kana-menu-alphabet-button" onClick={toggleAlphabet}>{alphabet}</div>
       </div>
       <div className="kana-character-menu-container">
-        {ALPHABETS[alphabet].map((c, i) => <KanaCharacter char={c} key={i} />)}
+        {
+          ALPHABETS[alphabet].map((c, i) => {
+            // if (c !== " " && !(c in HIRAGANA_CHARACTERS) && !(c in KATAKANA_CHARACTERS)) {
+            //   return <div className="kana-menu-romaji-label">{c}</div>;
+            // }
+            return <KanaCharacter char={c} key={i} />;
+          })
+        }
       </div>
     </div>
   )
@@ -199,20 +293,6 @@ function App() {
     setActiveWordIndex(0)
   }
 
-  const toggleSelected = (char) => {
-    console.log(`Toggling ${char}`)
-    let newSelectedKana = new Set([...selectedKana])
-
-    if (selectedKana.has(char)) {
-      newSelectedKana.delete(char);
-    } else {
-      newSelectedKana.add(char);
-    }
-
-    console.log(newSelectedKana)
-    setSelectedKana(newSelectedKana);
-  }
-
   const activeWord = wordList.size > 0 ? [...wordList][activeWordIndex]["text"] : "..."
   const activeRomaji = wordList.size > 0 ? getRomajiString(activeWord) : "..."
   const activeDefinition = wordList.size > 0 ? [...wordList][activeWordIndex]["definition"] : "..."
@@ -239,11 +319,11 @@ function App() {
 
       </div>
       <div className="menu-container">
-      <div className="menu-item" onClick={() => setKanaMenuOpen(true)}>edit kana</div>
+        <div className="menu-item" onClick={() => setKanaMenuOpen(true)}>edit kana</div>
         <div className="menu-item">about</div>
         {/* <div className="menu-item">my stats</div> */}
       </div>
-      <KanaMenuOverlay selected={selectedKana} isOpen={kanaMenuOpen} onClose={() => setKanaMenuOpen(false)} toggleSelected={toggleSelected} />
+      <KanaMenuOverlay selected={selectedKana} isOpen={kanaMenuOpen} onClose={() => setKanaMenuOpen(false)} setSelectedKana={setSelectedKana} />
     </div>
   );
 }
