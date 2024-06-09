@@ -124,7 +124,7 @@
 }
 
 .kana-menu-alphabet-button {
-  font-size: 1vh;
+  font-size: 1.4vh;
   width: fit-content;
   margin: auto;
   cursor: pointer;
@@ -153,11 +153,14 @@
   padding-left: 1vh;
   cursor: pointer;
   color: #c3c3c3;
+  align-content: center;
+  justify-content: center;
 }
 
 .selected-romaji-label {
   color: #414649;
   font-weight: bold;
+
 }
 
 
@@ -182,7 +185,7 @@
 
   width: 4vh;
   height: 4vh;
-  font-size: 1.4vh;
+  font-size: 2.2vh;
   align-content: center;
   justify-content: center;
   padding-left: 1vh;
