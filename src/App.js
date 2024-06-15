@@ -383,6 +383,17 @@ function App() {
     updateWordList(selectedKana)
   }, [dictionary, selectedKana])
 
+
+  const nextWord = () => {
+    if (showDetails) {
+      if (activeWordIndex === wordList.size - 1) {
+        return;
+      }
+      setActiveWordIndex(prev => prev + 1)
+    }
+
+    setShowDetails(prev => !prev)
+  }
   // Handle key press events
   useEffect(() => {
     const handleKeyUp = (e) => {
@@ -459,7 +470,7 @@ function App() {
         {/* <div className="banner-title">romaji world</div>
         <div className="banner-subtitle">( • ̀ω•́ ) ✧ (●´ω｀●)</div> */}
       </div>
-      <div className="active-word-container">
+      <div className="active-word-container" onTouchStart={nextWord}>
         {
           wordList.size > 0 ?
             <div id="active-word">{activeWord}</div> :
