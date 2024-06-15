@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/romaji.build/static/css/main.d3d9e693.css",
+    "main.css": "/romaji.build/static/css/main.171da5a0.css",
     "main.js": "/romaji.build/static/js/main.2ea0acf2.js",
     "static/js/453.d4506abe.chunk.js": "/romaji.build/static/js/453.d4506abe.chunk.js",
     "index.html": "/romaji.build/index.html",
-    "main.d3d9e693.css.map": "/romaji.build/static/css/main.d3d9e693.css.map",
+    "main.171da5a0.css.map": "/romaji.build/static/css/main.171da5a0.css.map",
     "main.2ea0acf2.js.map": "/romaji.build/static/js/main.2ea0acf2.js.map",
     "453.d4506abe.chunk.js.map": "/romaji.build/static/js/453.d4506abe.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.d3d9e693.css",
+    "static/css/main.171da5a0.css",
     "static/js/main.2ea0acf2.js"
   ]
 }
