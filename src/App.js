@@ -465,10 +465,10 @@ function App() {
   return (
     <div className="app-container">
       <div className="banner-container">
-        <div className="banner-title">日本語.build</div>
-        <div className="banner-subtitle">kana word building tool</div>
-        {/* <div className="banner-title">romaji world</div>
-        <div className="banner-subtitle">( • ̀ω•́ ) ✧ (●´ω｀●)</div> */}
+        <div className="banner-title">romaji.build</div>
+        <div className="banner-subtitle">( • ̀ω•́ ) ✧ (●´ω｀●)</div>
+        {/* <div className="banner-title">nihongo.build</div>
+        <div className="banner-subtitle">kana word building tool</div> */}
       </div>
       <div className="active-word-container" onTouchStart={nextWord}>
         {
