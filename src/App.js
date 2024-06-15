@@ -40,8 +40,8 @@ const KanaMenuOverlay = ({ isOpen, onClose, selected, setSelectedKana }) => {
     "m", "ま", "み", "む", "め", "も",
     "y", "や", " ", "ゆ", " ", "よ",
     "r", "ら", "り", "る", "れ", "ろ",
-    " ", "わ", " ", " ", " ", "を",
-    " ", " ", " ", "ん", " ", " ",
+    "w", "わ", " ", " ", " ", "を",
+    "n/m", " ", " ", "ん", " ", " ",
     "g", "が", "ぎ", "ぐ", "げ", "ご",
     "z", "ざ", "じ", "ず", "ぜ", "ぞ",
     "d", "だ", "ぢ", "づ", "で", "ど",
@@ -60,8 +60,8 @@ const KanaMenuOverlay = ({ isOpen, onClose, selected, setSelectedKana }) => {
     "m", "マ", "ミ", "ム", "メ", "モ",
     "y", "ヤ", " ", "ユ", " ", "ヨ",
     "r", "ラ", "リ", "ル", "レ", "ロ",
-    " ", "ワ", " ", " ", " ", "ヲ",
-    " ", " ", " ", "ン", " ", " ",
+    "w", "ワ", " ", " ", " ", "ヲ",
+    "n/m", " ", " ", "ン", " ", " ",
     "g", "ガ", "ギ", "グ", "ゲ", "ゴ",
     "z", "ザ", "ジ", "ズ", "ゼ", "ゾ",
     "d", "ダ", "ヂ", "ヅ", "デ", "ド",
@@ -91,7 +91,7 @@ const KanaMenuOverlay = ({ isOpen, onClose, selected, setSelectedKana }) => {
     // Start by finding all the fully selected ROWS
     for (var i = 7; i < ALPHABETS[alphabet].length; i += 6) {
       for (var j = i; j < i + 5; j++) {
-        if (!newSelectedKana.has(ALPHABETS[alphabet][j])) {
+        if (ALPHABETS[alphabet][j] !== " " && !newSelectedKana.has(ALPHABETS[alphabet][j])) {
           break;
         } else if (j === i + 4) {
           // This ROW is fully selected
@@ -120,7 +120,7 @@ const KanaMenuOverlay = ({ isOpen, onClose, selected, setSelectedKana }) => {
         }
       }
 
-      let labels = selectedColLabels + selectedRowLabels;
+      let labels = selectedColLabels.concat(selectedRowLabels);
       let newActiveRomajiLabels = { ...activeRomajiLabels };
       newActiveRomajiLabels[alphabet] = labels;
       setActiveRomajiLabels(newActiveRomajiLabels)
@@ -283,6 +283,9 @@ const KanaMenuOverlay = ({ isOpen, onClose, selected, setSelectedKana }) => {
 
       for (let i = 0; i < ALPHABETS[alphabet].length; i++) {
         let c = ALPHABETS[alphabet][i];
+        if (c === " ") {
+          continue;
+        }
         if (i > index && (isVowel && i % 6 === index) || (!isVowel && Math.ceil(i / 6) * 6 - 6 === index)) {
           if (deselect) {
             console.log(`removing ${c}`)
