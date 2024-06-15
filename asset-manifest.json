@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/static/css/main.d3d9e693.css",
-    "main.js": "/static/js/main.4481674b.js",
-    "static/js/453.c717cc67.chunk.js": "/static/js/453.c717cc67.chunk.js",
-    "index.html": "/index.html",
-    "main.d3d9e693.css.map": "/static/css/main.d3d9e693.css.map",
-    "main.4481674b.js.map": "/static/js/main.4481674b.js.map",
-    "453.c717cc67.chunk.js.map": "/static/js/453.c717cc67.chunk.js.map"
+    "main.css": "/romaji.build/static/css/main.d3d9e693.css",
+    "main.js": "/romaji.build/static/js/main.20dabc0b.js",
+    "static/js/453.d4506abe.chunk.js": "/romaji.build/static/js/453.d4506abe.chunk.js",
+    "index.html": "/romaji.build/index.html",
+    "main.d3d9e693.css.map": "/romaji.build/static/css/main.d3d9e693.css.map",
+    "main.20dabc0b.js.map": "/romaji.build/static/js/main.20dabc0b.js.map",
+    "453.d4506abe.chunk.js.map": "/romaji.build/static/js/453.d4506abe.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.d3d9e693.css",
-    "static/js/main.4481674b.js"
+    "static/js/main.20dabc0b.js"
   ]
 }
