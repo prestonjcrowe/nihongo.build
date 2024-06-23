@@ -253,9 +253,11 @@ function App() {
   const nextWord = () => {
     if (showDetails) {
       if (activeWordIndex === wordList.size - 1) {
-        return;
+        setActiveWordIndex(0)
+      } else {
+        console.log("Reached end of word list - starting over from beginning")
+        setActiveWordIndex(prev => prev + 1)
       }
-      setActiveWordIndex(prev => prev + 1)
     }
 
     setShowDetails(prev => !prev)
