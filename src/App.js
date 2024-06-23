@@ -87,7 +87,7 @@ const KanaMenuOverlay = ({ isOpen, onClose, selected, setSelectedKana }) => {
   const updateRomajiLabels = (newSelectedKana) => {
     var selectedRowLabels = [];
     var selectedColLabels = [];
-    
+
     // Start by finding all the fully selected ROWS
     for (var i = 7; i < ALPHABETS[alphabet].length; i += 6) {
       for (var j = i; j < i + 5; j++) {
@@ -98,99 +98,32 @@ const KanaMenuOverlay = ({ isOpen, onClose, selected, setSelectedKana }) => {
           let rowLabel = ALPHABETS[alphabet][Math.ceil(j / 6) * 6 - 6];
           if (rowLabel !== " ") {
             console.log(`Row ${rowLabel} is fully selected`)
-            selectedRowLabels.push(rowLabel)  
+            selectedRowLabels.push(rowLabel)
           }
         }
       }
     }
 
-      // Now find all the fully selected COLS
-      for (var i = 7; i < 12; i++) {
-        for (var j = i; j < ALPHABETS[alphabet].length; j += 6) {
-          if (ALPHABETS[alphabet][j] !== " " && !newSelectedKana.has(ALPHABETS[alphabet][j])) {
-            break;
-          } else if (j + 6 >= ALPHABETS[alphabet].length) {
-            // This COL is fully selected
-            let colLabel = ALPHABETS[alphabet][j % 6];
+    // Now find all the fully selected COLS
+    for (var i = 7; i < 12; i++) {
+      for (var j = i; j < ALPHABETS[alphabet].length; j += 6) {
+        if (ALPHABETS[alphabet][j] !== " " && !newSelectedKana.has(ALPHABETS[alphabet][j])) {
+          break;
+        } else if (j + 6 >= ALPHABETS[alphabet].length) {
+          // This COL is fully selected
+          let colLabel = ALPHABETS[alphabet][j % 6];
 
-            selectedColLabels.push(colLabel);
+          selectedColLabels.push(colLabel);
 
-            console.log(`Column ${colLabel} is fully selected`)
-          }
+          console.log(`Column ${colLabel} is fully selected`)
         }
       }
+    }
 
-      let labels = selectedColLabels.concat(selectedRowLabels);
-      let newActiveRomajiLabels = { ...activeRomajiLabels };
-      newActiveRomajiLabels[alphabet] = labels;
-      setActiveRomajiLabels(newActiveRomajiLabels)
-    
-    
-    
-      // console.log(`Updating labels after toggling ${char}`);
-
-    // if (removed) {
-    //   let index = ALPHABETS[alphabet].indexOf(char);
-    //   let col_selector = ALPHABETS[alphabet][index % 6];
-    //   let row_selector = ALPHABETS[alphabet][Math.ceil(index / 6) * 6 - 6];
-    //   console.log(`row label: ${row_selector} col label: ${col_selector}`)
-
-    //   let activeAlphabetLabels = activeRomajiLabels[alphabet];
-    //   // If either row or column label is active, must disable both
-    //   if (activeAlphabetLabels.includes(col_selector) || activeAlphabetLabels.includes(row_selector)) {
-    //     let labels = activeAlphabetLabels.filter(l => l !== col_selector && l !== row_selector);
-    //     let newActiveRomajiLabels = { ...activeRomajiLabels };
-    //     newActiveRomajiLabels[alphabet] = labels;
-    //     setActiveRomajiLabels(newActiveRomajiLabels)
-    //   }
-    // } else {
-    //   let index = ALPHABETS[alphabet].indexOf(char);
-    //   let col_selector_idx = index % 6;
-    //   let row_selector_idx = Math.ceil(index / 6) * 6 - 6;
-    //   let char_row = [];
-    //   let char_col = [];
-
-    //   for (var i = 7; i < ALPHABETS[alphabet].length; i++) {
-    //     if (i % 6 === col_selector_idx && isKana(ALPHABETS[alphabet][i])) {
-    //       // This character is in the same col
-    //       char_col.push(ALPHABETS[alphabet][i]);
-    //     }
-    //     if (i > row_selector_idx && i < row_selector_idx + 6 && isKana(ALPHABETS[alphabet][i])) {
-    //       char_row.push(ALPHABETS[alphabet][i])
-    //     }
-    //   }
-
-    //   let colSelected = char_col.reduce((acc, cur) => acc && newSelectedKana.has(cur), true);
-    //   let rowSelected = char_row.reduce((acc, cur) => acc && newSelectedKana.has(cur), true);
-
-    //   if (colSelected) {
-    //     let colLabel = ALPHABETS[alphabet][index % 6];
-    //     let newLabels = [...new Set(activeRomajiLabels[alphabet]), colLabel];
-    //     let newActiveRomajiLabels = {...activeRomajiLabels};
-    //     newActiveRomajiLabels[alphabet] = newLabels;
-    //     setActiveRomajiLabels(newActiveRomajiLabels);
-    //   }
-
-    //   if (rowSelected) {
-    //     let rowLabel = ALPHABETS[alphabet][Math.ceil(index / 6) * 6 - 6];
-
-    //     let newLabels = [...new Set(activeRomajiLabels[alphabet]), rowLabel];
-    //     let newActiveRomajiLabels = {...activeRomajiLabels};
-    //     newActiveRomajiLabels[alphabet] = newLabels;
-    //     setActiveRomajiLabels(newActiveRomajiLabels);
-    //   }
-
-    //   console.log(newSelectedKana)
-    //   console.log(char_row)
-    //   console.log(char_col)
-    //   console.log(rowSelected)
-    //   console.log(colSelected)
-    // }
-
-
-    // console.log(newSelectedKana)
-    // setSelectedKana(newSelectedKana);
-  
+    let labels = selectedColLabels.concat(selectedRowLabels);
+    let newActiveRomajiLabels = { ...activeRomajiLabels };
+    newActiveRomajiLabels[alphabet] = labels;
+    setActiveRomajiLabels(newActiveRomajiLabels)
   }
 
   const KanaCharacter = ({ char }) => {
@@ -204,64 +137,10 @@ const KanaMenuOverlay = ({ isOpen, onClose, selected, setSelectedKana }) => {
       let removed = selected.has(char);
       if (removed) {
         newSelectedKana.delete(char);
-        // let index = ALPHABETS[alphabet].indexOf(char);
-        // let col_selector = ALPHABETS[alphabet][index % 6];
-        // let row_selector = ALPHABETS[alphabet][Math.ceil(index / 6) * 6 - 6];
-        // console.log(`row label: ${row_selector} col label: ${col_selector}`)
-
-        // let activeAlphabetLabels = activeRomajiLabels[alphabet];
-        // // If either row or column label is active, must disable both
-        // if (activeAlphabetLabels.includes(col_selector) || activeAlphabetLabels.includes(row_selector)) {
-        //   let labels = activeAlphabetLabels.filter(l => l !== col_selector && l !== row_selector);
-        //   let newActiveRomajiLabels = { ...activeRomajiLabels };
-        //   newActiveRomajiLabels[alphabet] = labels;
-        //   setActiveRomajiLabels(newActiveRomajiLabels)
-        // }
       } else {
         newSelectedKana.add(char);
-        // let index = ALPHABETS[alphabet].indexOf(char);
-        // let col_selector_idx = index % 6;
-        // let row_selector_idx = Math.ceil(index / 6) * 6 - 6;
-        // let char_row = [];
-        // let char_col = [];
-
-        // for (var i = 7; i < ALPHABETS[alphabet].length; i++) {
-        //   if (i % 6 === col_selector_idx && isKana(ALPHABETS[alphabet][i])) {
-        //     // This character is in the same col
-        //     char_col.push(ALPHABETS[alphabet][i]);
-        //   }
-        //   if (i > row_selector_idx && i < row_selector_idx + 6 && isKana(ALPHABETS[alphabet][i])) {
-        //     char_row.push(ALPHABETS[alphabet][i])
-        //   }
-        // }
-
-        // let colSelected = char_col.reduce((acc, cur) => acc && newSelectedKana.has(cur), true);
-        // let rowSelected = char_row.reduce((acc, cur) => acc && newSelectedKana.has(cur), true);
-
-        // if (colSelected) {
-        //   let colLabel = ALPHABETS[alphabet][index % 6];
-        //   let newLabels = [...new Set(activeRomajiLabels[alphabet]), colLabel];
-        //   let newActiveRomajiLabels = {...activeRomajiLabels};
-        //   newActiveRomajiLabels[alphabet] = newLabels;
-        //   setActiveRomajiLabels(newActiveRomajiLabels);
-        // }
-
-        // if (rowSelected) {
-        //   let rowLabel = ALPHABETS[alphabet][Math.ceil(index / 6) * 6 - 6];
-
-        //   let newLabels = [...new Set(activeRomajiLabels[alphabet]), rowLabel];
-        //   let newActiveRomajiLabels = {...activeRomajiLabels};
-        //   newActiveRomajiLabels[alphabet] = newLabels;
-        //   setActiveRomajiLabels(newActiveRomajiLabels);
-        // }
-
         console.log(newSelectedKana)
-        // console.log(char_row)
-        // console.log(char_col)
-        // console.log(rowSelected)
-        // console.log(colSelected)
       }
-
 
       console.log(newSelectedKana)
       setSelectedKana(newSelectedKana);
@@ -301,20 +180,7 @@ const KanaMenuOverlay = ({ isOpen, onClose, selected, setSelectedKana }) => {
       console.log(newSelectedKana)
       console.log(`new kana: ${newSelectedKana.size}`)
       setSelectedKana(newSelectedKana);
-
       updateRomajiLabels(newSelectedKana, deselect, char)
-      // if (activeRomajiLabels[alphabet].includes(romaijLabel)) {
-      //   let labels = activeRomajiLabels[alphabet].filter(l => l !== romaijLabel);
-      //   let newActiveRomajiLabels = { ...activeRomajiLabels };
-      //   newActiveRomajiLabels[alphabet] = labels;
-      //   setActiveRomajiLabels(newActiveRomajiLabels);
-      // } else {
-      //   let labels = [...activeRomajiLabels[alphabet], romaijLabel];
-      //   let newActiveRomajiLabels = { ...activeRomajiLabels }
-      //   newActiveRomajiLabels[alphabet] = labels;
-      //   setActiveRomajiLabels(newActiveRomajiLabels);
-      // }
-
     }
 
     // This is a romaji label
@@ -348,9 +214,6 @@ const KanaMenuOverlay = ({ isOpen, onClose, selected, setSelectedKana }) => {
       <div className="kana-character-menu-container">
         {
           ALPHABETS[alphabet].map((c, i) => {
-            // if (c !== " " && !(c in HIRAGANA_CHARACTERS) && !(c in KATAKANA_CHARACTERS)) {
-            //   return <div className="kana-menu-romaji-label">{c}</div>;
-            // }
             return <KanaCharacter char={c} key={i} />;
           })
         }
