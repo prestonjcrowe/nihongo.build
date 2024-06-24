@@ -23,6 +23,25 @@ import './App.css';
 // ⠈⠀⠀⣠⠴⠚⢯⡀⠐⠒⠚⠉⠀⢶⠂⠀⣀⠜⠀⢿⡀⠉⠚⠉⠀⠀⠀⠀⣠⠟
 // ⠀⠠⠊⠀⠀⠀⠀⠙⠂⣴⠒⠒⣲⢔⠉⠉⣹⣞⣉⣈⠿⢦⣀⣀⣀⣠⡴⠟
 
+const TINY_KANA = {
+  "ゃ": "や",
+  "ゅ": "ゆ",
+  "ょ": "よ",
+  "ぁ": "あ",
+  "ぃ": "い",
+  "ぅ": "う",
+  "ぇ": "え",
+  "ぉ": "お",
+  "ャ": "ヤ",
+  "ュ": "ユ",
+  "ョ": "ヨ",
+  "ァ": "ア",
+  "ィ": "イ",
+  "ゥ": "ウ",
+  "ェ": "エ",
+  "ォ": "オ"
+}
+
 const KanaMenuOverlay = ({ isOpen, onClose, selected, setSelectedKana }) => {
   const [alphabet, setAlphabet] = useState("hiragana");
   const [activeRomajiLabels, setActiveRomajiLabels] = useState({
@@ -291,6 +310,20 @@ function App() {
 
   const shouldIncludeWord = (word) => {
     for (let i = 0; i < word.length; i++) {
+      // Always allow katakana ー
+      if (word.charAt(i) === "ー") {
+        continue
+      }
+
+      // If this is a tiny character, check to make sure we have the original
+      // unicode char in selectedKana
+      if (word.charAt(i) in TINY_KANA) {
+        let convertedKana = TINY_KANA[word.charAt(i)]
+        if (!selectedKana.has(convertedKana)) {
+          return false
+        }
+        continue
+      }
       if (!selectedKana.has(word.charAt(i))) {
         return false
       }
