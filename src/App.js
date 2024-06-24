@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { isHiragana, isKana, isRomaji, toRomaji } from 'wanakana';
 import './App.css';
 
@@ -251,7 +251,20 @@ function App() {
   const [entityCodes, setEntityCodes] = useState({})
   const [kanaMenuOpen, setKanaMenuOpen] = useState(false)
 
-  // Load dictionary on component mount
+  const readLocalStorage = useMemo(
+    () => {
+      console.log("Checking local storage for selectedKana...");
+      const cachedKana = JSON.parse(localStorage.getItem('selectedKana'));
+      if (cachedKana) {
+      console.log("Found cached kana in local storage")
+      console.log(cachedKana)
+      setSelectedKana(new Set(cachedKana));
+      }
+    },
+    []
+  );
+
+  // Load cached kana and dictionary on component mount
   useEffect(() => {
     console.log("Fetching dictionary JSON...")
     fetch('entity_codes.json')
@@ -281,6 +294,13 @@ function App() {
 
     setShowDetails(prev => !prev)
   }
+
+  // Commit selectedKana to local storage on update
+  useEffect(() => {
+    console.log([...selectedKana])
+    localStorage.setItem('selectedKana', JSON.stringify([...selectedKana]));
+  }, [selectedKana])
+
   // Handle key press events
   useEffect(() => {
     const handleKeyUp = (e) => {
