@@ -9,7 +9,6 @@
   user-select: none;
   height: 100%;
   width: 100% !important;
-
 }
 
 #root {
@@ -85,6 +84,7 @@ body {
     align-items: center;
     padding: 25px;
     row-gap: 25px;
+    overflow: auto;
 }
 
 /* app menu */
