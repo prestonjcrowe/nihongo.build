@@ -42,6 +42,11 @@ const TINY_KANA = {
   "ォ": "オ"
 }
 
+const kaomoji = [
+  
+"(ﾉ´ з `)ノ	(♡μ_μ)",	"(*^^*)♡	☆⌒ヽ(*'､^*)chu"
+]
+
 const KanaMenuOverlay = ({ isOpen, onClose, selected, setSelectedKana }) => {
   const [alphabet, setAlphabet] = useState("hiragana");
   const [activeRomajiLabels, setActiveRomajiLabels] = useState({
@@ -237,6 +242,9 @@ const KanaMenuOverlay = ({ isOpen, onClose, selected, setSelectedKana }) => {
           })
         }
       </div>
+      {/* <div className='kana-select-all-container'>
+        <div className="kana-select-all">select all</div>
+      </div> */}
     </div>
   )
 }
