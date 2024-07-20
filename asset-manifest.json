@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/kana.build/static/css/main.bfdaa1e7.css",
-    "main.js": "/kana.build/static/js/main.2ca5f114.js",
-    "static/js/453.b22e3e83.chunk.js": "/kana.build/static/js/453.b22e3e83.chunk.js",
-    "index.html": "/kana.build/index.html",
-    "main.bfdaa1e7.css.map": "/kana.build/static/css/main.bfdaa1e7.css.map",
-    "main.2ca5f114.js.map": "/kana.build/static/js/main.2ca5f114.js.map",
-    "453.b22e3e83.chunk.js.map": "/kana.build/static/js/453.b22e3e83.chunk.js.map"
+    "main.css": "/romaji.build/static/css/main.bfdaa1e7.css",
+    "main.js": "/romaji.build/static/js/main.eb54e502.js",
+    "static/js/453.d4506abe.chunk.js": "/romaji.build/static/js/453.d4506abe.chunk.js",
+    "index.html": "/romaji.build/index.html",
+    "main.bfdaa1e7.css.map": "/romaji.build/static/css/main.bfdaa1e7.css.map",
+    "main.eb54e502.js.map": "/romaji.build/static/js/main.eb54e502.js.map",
+    "453.d4506abe.chunk.js.map": "/romaji.build/static/js/453.d4506abe.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.bfdaa1e7.css",
-    "static/js/main.2ca5f114.js"
+    "static/js/main.eb54e502.js"
   ]
 }
