@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/kana.build/static/css/main.bfdaa1e7.css",
-    "main.js": "/kana.build/static/js/main.bf3ff54e.js",
-    "static/js/453.d4506abe.chunk.js": "/kana.build/static/js/453.d4506abe.chunk.js",
+    "main.js": "/kana.build/static/js/main.2ca5f114.js",
+    "static/js/453.b22e3e83.chunk.js": "/kana.build/static/js/453.b22e3e83.chunk.js",
     "index.html": "/kana.build/index.html",
     "main.bfdaa1e7.css.map": "/kana.build/static/css/main.bfdaa1e7.css.map",
-    "main.bf3ff54e.js.map": "/kana.build/static/js/main.bf3ff54e.js.map",
-    "453.d4506abe.chunk.js.map": "/kana.build/static/js/453.d4506abe.chunk.js.map"
+    "main.2ca5f114.js.map": "/kana.build/static/js/main.2ca5f114.js.map",
+    "453.b22e3e83.chunk.js.map": "/kana.build/static/js/453.b22e3e83.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.bfdaa1e7.css",
-    "static/js/main.bf3ff54e.js"
+    "static/js/main.2ca5f114.js"
   ]
 }
