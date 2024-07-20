@@ -50,7 +50,7 @@ const KanaMenuOverlay = ({ isOpen, onClose, selected, setSelectedKana }) => {
   });
   const HIRAGANA_CHARACTERS = [
     " ", "a", "i", "u", "e", "o",
-    " ", "あ", "い", "う", "え", "お",
+    "-", "あ", "い", "う", "え", "お",
     "k", "か", "き", "く", "け", "こ",
     "s", "さ", "し", "す", "せ", "そ",
     "t", "た", "ち", "つ", "て", "と",
@@ -70,7 +70,7 @@ const KanaMenuOverlay = ({ isOpen, onClose, selected, setSelectedKana }) => {
 
   const KATAKANA_CHARACTERS = [
     " ", "a", "i", "u", "e", "o",
-    " ", "ア", "イ", "ウ", "エ", "オ",
+    "-", "ア", "イ", "ウ", "エ", "オ",
     "k", "カ", "キ", "ク", "ケ", "コ",
     "s", "サ", "シ", "ス", "セ", "ソ",
     "t", "タ", "チ", "ツ", "テ", "ト",
