@@ -386,7 +386,7 @@ function App() {
   return (
     <div className="app-container">
       <div className="banner-container">
-        <div className="banner-title">romaji.build</div>
+        <div className="banner-title">kana.build</div>
         <div className="banner-subtitle">( • ̀ω•́ ) ✧ (●´ω｀●)</div>
         {/* <div className="banner-title">nihongo.build</div>
         <div className="banner-subtitle">kana word building tool</div> */}
