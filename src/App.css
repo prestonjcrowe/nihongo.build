@@ -129,7 +129,7 @@ body {
 .kana-menu-controls-container {
   display: flex;
   flex-direction: row;
-  padding-top: 1em;
+  padding-top: 3.75vh;
   width: 22.727272vh;
   margin: auto;
   padding-left: 2vh;
@@ -161,7 +161,7 @@ body {
   grid-template-columns: repeat(6, 1fr);
   grid-template-rows: repeat(17, 1fr);
   margin: auto;
-  gap: 0.5vh;
+  gap: 0.75vh;
   width: fit-content;
 }
 
